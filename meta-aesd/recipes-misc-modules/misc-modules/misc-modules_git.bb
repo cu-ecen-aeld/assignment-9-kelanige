@@ -12,8 +12,8 @@ LICENSE = "CLOSED"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f098732a73b5f6f3430472f5b094ffdb"
 
 SRC_URI = "git://git@github.com/cu-ecen-aeld/assignment-7-kelanige.git;protocol=ssh;branch=main \
-           file://0001-Only-build-scull-misc-modules.patch \
-           file://files/scull-start-stop \
+           file://0001-Only-build-misc-modules-scull.patch \
+           file://misc-modules-start-stop \
            "
 
 # Modify these as desired
@@ -24,17 +24,20 @@ S = "${WORKDIR}/git"
 
 inherit module
 inherit update-rc.d
-INITSCRIPT_NAME = "scull-start-stop"
+INITSCRIPT_NAME = "misc-modules-start-stop"
 INITSCRIPT_PARAMS = "start 99 S ."
 
-KERNEL_MODULE_AUTOLOAD += "scull"
-
 EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
-EXTRA_OEMAKE:append:task-install = " -C ${STAGING_KERNEL_DIR} M=${S}/scull"
-RPROVIDES:${PN} += "kernel-module-scull"
-FILES:${PN} += "${INIT_D_DIR}/${INITSCRIPT_NAME}"
+EXTRA_OEMAKE:append:task-install = " -C ${STAGING_KERNEL_DIR} M=${S}/misc-modules"
+
+RPROVIDES:${PN} += "kernel-module-hello"
+FILES:${PN} += "${INIT_D_DIR}/${INITSCRIPT_NAME} ${bindir}/module_load ${bindir}/module_unload"
 
 do_install:append () {
     install -d ${D}${INIT_D_DIR}
-    install -m 0755 ${WORKDIR}/files/${INITSCRIPT_NAME} ${D}${INIT_D_DIR}/${INITSCRIPT_NAME}
+    install -m 0755 ${WORKDIR}/${INITSCRIPT_NAME} ${D}${INIT_D_DIR}/${INITSCRIPT_NAME}
+
+    install -d ${D}${bindir}
+    install -m 0755 ${WORKDIR}/git/misc-modules/module_load ${D}${bindir}/
+    install -m 0755 ${WORKDIR}/git/misc-modules/module_unload ${D}${bindir}/
 }
