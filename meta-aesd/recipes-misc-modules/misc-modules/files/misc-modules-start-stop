@@ -1,6 +1,9 @@
 #! /bin/sh
 set -e
 
+# This is probably not the correct way to do this, but a hacky workaround.
+WD= pwd
+cd /lib/modules/5.15.118-yocto-standard/extra
 case "$1" in
     start)
         echo "loading misc-modules"
@@ -14,6 +17,8 @@ case "$1" in
         ;;
     *)
         echo "usage: $0 {start|stop}"
+        cd $WD
         exit 1
 esac
+cd $WD
 exit0

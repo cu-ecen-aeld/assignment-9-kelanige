@@ -18,7 +18,7 @@ SRC_URI = "git://git@github.com/cu-ecen-aeld/assignment-7-kelanige.git;protocol=
 
 # Modify these as desired
 PV = "1.0+git${SRCPV}"
-SRCREV = "b86c1f8dd886564d9b6498bcb0371c2098363626"
+SRCREV = "d10f23e0a4934a7386b99f0ad3b0c77a7fac2896"
 
 S = "${WORKDIR}/git"
 
