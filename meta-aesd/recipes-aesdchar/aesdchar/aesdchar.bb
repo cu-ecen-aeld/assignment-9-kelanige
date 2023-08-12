@@ -8,13 +8,13 @@
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-SRC_URI = "git://git@github.com/cu-ecen-aeld/assignments-3-and-later-kelanige.git;protocol=ssh;branch=devtool \
+SRC_URI = "git://git@github.com/cu-ecen-aeld/assignments-3-and-later-kelanige.git;protocol=ssh;branch=main \
           file://aesdchar-start-stop \
           "
 
 # Modify these as desired
 PV = "1.0+git${SRCPV}"
-SRCREV = "0316c8fff76d3feb2373fccce7db49f187208b62"
+SRCREV = "b82375c23ed5d6487df5f8c36b37d72d7775fe34"
 
 S = "${WORKDIR}/git/aesd-char-driver"
 
